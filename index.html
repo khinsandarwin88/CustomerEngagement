@@ -1083,32 +1083,32 @@
 
         <!-- Main Menu Grid -->
         <div id="mainMenu" class="main-menu-grid">
-            <div class="menu-card" onclick="showSection('courseFinderDetailSection')">
+            <div class="menu-card" data-section="courseFinderDetailSection">
                 <div class="card-icon">📚</div>
                 <h3>Find Your Course</h3>
                 <p class="card-subtitle-myanmar">သင့်သင်တန်းကို ရှာဖွေပါ</p>
                 <p class="card-subtitle-thai">ค้นหาคอร์สของคุณ</p>
             </div>
-            <div class="menu-card" onclick="showSection('faqDetailSection')">
+            <div class="menu-card" data-section="faqDetailSection">
                 <div class="card-icon">❓</div>
                 <h3>Frequently Asked Questions</h3>
                 <p class="card-subtitle-myanmar">မေးလေ့ရှိသော မေးခွန်းများ</p>
                 <p class="card-subtitle-thai">คำถามที่พบบ่อย</p>
             </div>
-            <div class="menu-card" onclick="showSection('lecturerDetailSection')">
+            <div class="menu-card" data-section="lecturerDetailSection">
                 <div class="card-icon">👨‍🏫</div>
                 <h3>Meet Our Expert Lecturers</h3>
                 <p class="card-subtitle-myanmar">ကျွန်ုပ်တို့၏ ဆရာ/ဆရာမများ</p>
                 <p class="card-subtitle-thai">พบกับอาจารย์ผู้เชี่ยวชาญของเรา</p>
             </div>
-            <div class="menu-card" onclick="showSection('testimonialsDetailSection')">
+            <div class="menu-card" data-section="testimonialsDetailSection">
                 <div class="card-icon">💖</div>
                 <h3>Hear From Our Students!</h3>
                 <p class="card-subtitle-myanmar">ကျောင်းသားများ၏ အတွေ့အကြုံများ</p>
                 <p class="card-subtitle-thai">เสียงจากนักเรียนของเรา</p>
             </div>
-            <div class="menu-card" onclick="showSection('imageGalleryDetailSection')">
-                <div class="card-icon">🏞️</div> <!-- Changed icon to a landscape/scenery emoji -->
+            <div class="menu-card" data-section="imageGalleryDetailSection">
+                <div class="card-icon">🏞️</div>
                 <h3>Cultural Journey</h3>
                 <p class="card-subtitle-myanmar">ယဉ်ကျေးမှု ခရီးစဉ်</p>
                 <p class="card-subtitle-thai">การเดินทางทางวัฒนธรรม</p>
@@ -1710,10 +1710,16 @@
 
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Attach click event to all menu cards for navigation
+            document.querySelectorAll('.menu-card[data-section]').forEach(card => {
+                card.addEventListener('click', function () {
+                    const section = this.getAttribute('data-section');
+                    if (section) showSection(section);
+                });
+            });
+
             initDarkMode();
-            showSection('mainMenu'); // Show the main menu first
-            // Initial render calls for the detail sections, even if hidden.
-            // These will be re-rendered by showSection() when actually viewed.
+            showSection('mainMenu');
             renderFaqs();
             renderLecturers();
             renderTestimonials();
