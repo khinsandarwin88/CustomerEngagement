@@ -161,7 +161,7 @@
             overflow: visible;
         }
 
-        .hero-greeting, .hero-greeting-mm, .hero-heading, .hero-subheading {
+        .hero-greeting, .hero-greeting-mm, .hero-subheading {
             transition: 
                 transform 0.35s cubic-bezier(.25,1.7,.45,.85),
                 box-shadow 0.35s cubic-bezier(.25,1.7,.45,.85),
@@ -1101,15 +1101,18 @@
     <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode"> 🌙 </button>
     <div class="container">
         <section class="hero-section">
-            <div class="hero-greeting" tabindex="0"> สวัสดีค่ะ ! (Sawasdee ka!)</div>
-            <div class="hero-greeting-mm" tabindex="0"> မင်္ဂလာပါ။ OKay Thai Language Center မှ ကြိုဆိုပါတယ်။ </div>
+            <!-- === HERO GREETING & SUBTITLE === -->
+            <div class="hero-greeting" tabindex="0">สวัสดีค่ะ ! (Sawasdee ka!)</div>
+            <div class="hero-greeting-mm" tabindex="0">မင်္ဂလာပါ။ OKay Thai Language Center မှ ကြိုဆိုပါတယ်။</div>
+            <!-- === MAIN TITLE (MARQUEE ONLY) === -->
             <marquee behavior="scroll" direction="left" scrollamount="8">
                 <h1 class="hero-heading" tabindex="0" style="display:inline-block; margin:0;">OKay Thai Language Center</h1>
             </marquee>
+            <!-- === SUBTITLE === -->
             <p class="hero-subheading" tabindex="0">
                 Your Gateway to Thai Language & Culture Online<br>
                 <span>
-                     သင်၏ ထိုင်းဘာသာစကားနှင့် ယဉ်ကျေးမှုသို့ ဝင်ရောက်သင်ကြားရန် အကောင်းဆုံးနေရာ
+                    သင်၏ ထိုင်းဘာသာစကားနှင့် ယဉ်ကျေးမှုသို့ ဝင်ရောက်သင်ကြားရန် အကောင်းဆုံးနေရာ
                 </span>
             </p>
             <!-- Hero CTA is now integrated into the main menu structure, so it's removed from here -->
@@ -1361,18 +1364,33 @@
         </div>
     </div>
 
+    <!-- === MODULAR JAVASCRIPT === -->
     <script>
-        // --- UTILITY FUNCTIONS ---
-        function showMessageBox(message) {
-            document.getElementById("messageText").textContent = message;
-            document.getElementById("messageBox").style.display = "block";
+        // =========================
+        // === DARK MODE MODULE ====
+        // =========================
+        function setDarkMode(enabled) {
+            if (enabled) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeToggle').textContent = ' ☀️ ';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('darkModeToggle').textContent = ' 🌙 ';
+            }
+            localStorage.setItem('thaiDarkMode', enabled ? '1' : '0');
+        }
+        function toggleDarkMode() {
+            setDarkMode(!document.body.classList.contains('dark-mode'));
+        }
+        function initDarkMode() {
+            document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+            setDarkMode(localStorage.getItem('thaiDarkMode') === '1');
         }
 
-        function hideMessageBox() {
-            document.getElementById("messageBox").style.display = "none";
-        }
-
-        const load = (key, fallback = []) => {
+        // =========================
+        // === LOCAL STORAGE UTIL ==
+        // =========================
+        function load(key, fallback = []) {
             try {
                 const stored = localStorage.getItem(key);
                 return stored ? JSON.parse(stored) : fallback;
@@ -1380,18 +1398,30 @@
                 console.error(`Error loading ${key} from localStorage:`, e);
                 return fallback;
             }
-        };
-
-        const save = (key, data) => {
+        }
+        function save(key, data) {
             try {
                 localStorage.setItem(key, JSON.stringify(data));
             } catch (e) {
                 console.error(`Error saving ${key} to localStorage:`, e);
             }
-        };
+        }
 
-        // --- MOCK COURSE DATA (Updated with specific classes, levels, and MMK pricing) ---
-        let courses = load('thaiCourses', {
+        // =========================
+        // === MESSAGE BOX MODULE ==
+        // =========================
+        function showMessageBox(message) {
+            document.getElementById("messageText").textContent = message;
+            document.getElementById("messageBox").style.display = "block";
+        }
+        function hideMessageBox() {
+            document.getElementById("messageBox").style.display = "none";
+        }
+
+        // =========================
+        // === COURSE FINDER MODULE =
+        // =========================
+        const courses = load('thaiCourses', {
             "Normal Class": [
                 { id: 'normal-basic', name: 'Normal Class - Basic Level', level: 'Basic', duration: '2 months', price: 'MMK 149,000', teaching: 'Comprehensive online lessons, group activities, focus on foundational Thai grammar and vocabulary.' },
                 { id: 'normal-level2', name: 'Normal Class - Level 2', level: 'Level 2', duration: '2 months', price: 'MMK 200,000', teaching: 'Builds on basics, expands grammar and vocabulary, practices practical conversations for daily life.' },
@@ -1411,7 +1441,74 @@
         });
         save('thaiCourses', courses);
 
-        // --- MOCK FAQ DATA (Updated for online-only and new class structure) ---
+        function updateLevels() {
+            const classType = document.getElementById('classType').value;
+            const levelSelectionDiv = document.getElementById('levelSelection');
+            const classLevelSelect = document.getElementById('classLevel');
+            classLevelSelect.innerHTML = '<option value="">-- Select Level --</option>';
+            if (classType === "Private Class" || classType === "Basic Speaking Class") {
+                levelSelectionDiv.style.display = 'none';
+            } else if (classType) {
+                levelSelectionDiv.style.display = 'block';
+                const levels = courses[classType];
+                levels.forEach(course => {
+                    if (course.level !== 'Custom' && course.level !== 'Basic Speaking') {
+                        const option = document.createElement('option');
+                        option.value = course.level;
+                        option.textContent = course.level;
+                        classLevelSelect.appendChild(option);
+                    }
+                });
+            } else {
+                levelSelectionDiv.style.display = 'none';
+            }
+        }
+        function recommendCourse() {
+            const classType = document.getElementById('classType').value;
+            const classLevel = document.getElementById('classLevel').value;
+            if (!classType) {
+                showMessageBox("Please select a Class Type to find your perfect course!");
+                return;
+            }
+            let recommendedCourse = null;
+            if (classType === "Private Class") {
+                recommendedCourse = courses["Private Class"][0];
+            } else if (classType === "Basic Speaking Class") {
+                recommendedCourse = courses["Basic Speaking Class"][0];
+            } else {
+                if (!classLevel) {
+                    showMessageBox("Please select a Level for your chosen class type!");
+                    return;
+                }
+                recommendedCourse = courses[classType].find(course => course.level === classLevel);
+            }
+            const resultDiv = document.getElementById('recommendationResult');
+            if (recommendedCourse) {
+                document.getElementById('recommendedCourseName').textContent = recommendedCourse.name;
+                document.getElementById('recClassType').textContent = classType;
+                document.getElementById('recLevel').textContent = recommendedCourse.level;
+                document.getElementById('recDuration').textContent = recommendedCourse.duration;
+                document.getElementById('recPrice').textContent = recommendedCourse.price;
+                document.getElementById('recTeaching').textContent = recommendedCourse.teaching;
+                resultDiv.style.display = 'block';
+                document.getElementById('courseFinder').style.display = 'none';
+            } else {
+                showMessageBox("Sorry, no course found matching your selection. Please try different combinations or check our FAQs!");
+                resultDiv.style.display = 'none';
+                document.getElementById('courseFinder').style.display = 'block';
+            }
+        }
+        function resetCourseFinder() {
+            document.getElementById('classType').value = '';
+            document.getElementById('classLevel').innerHTML = '<option value="">-- Select Level --</option>';
+            document.getElementById('levelSelection').style.display = 'none';
+            document.getElementById('recommendationResult').style.display = 'none';
+            document.getElementById('courseFinder').style.display = 'block';
+        }
+
+        // =========================
+        // === FAQ MODULE ==========
+        // =========================
         let faqs = load('thaiFaqs', [
             { question: 'What types of classes do you offer?', answer: 'We offer Normal Class (Basic, Level 2, Level 3), Children Class (Basic, Level 2, Level 3), Basic Speaking Class, and Private Classes. All our classes are conducted online.' },
             { question: 'What are the schedules for Normal and Children classes?', answer: 'Schedules for Normal and Children classes are fixed for each level and will be provided upon inquiry. Private class schedules are flexible and can be adjusted directly with your lecturer.' },
@@ -1615,7 +1712,9 @@
             });
         }
 
-        // --- SECTION NAVIGATION LOGIC ---
+        // =========================
+        // === SECTION NAVIGATION ==
+        // =========================
         // Function to show a specific section and hide others
         function showSection(sectionId) {
             // Hide the main menu
@@ -1668,7 +1767,7 @@
 
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
-            setDarkMode(localStorage.getItem('thaiDarkMode') === '1'); // Apply dark mode on load if saved
+            initDarkMode();
             showSection('mainMenu'); // Show the main menu first
             // Initial render calls for the detail sections, even if hidden.
             // These will be re-rendered by showSection() when actually viewed.
