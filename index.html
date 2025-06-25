@@ -780,235 +780,94 @@
         }
 
 
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            .container {
-                padding: 25px;
-                margin: 10px auto;
-            }
-            .header-content img {
-                max-width: 140px;
-                margin-bottom: 15px;
-            }
-            h1 {
-                font-size: 3.2em;
-            }
-            .subtitle {
-                font-size: 1.1em;
-                margin-bottom: 20px;
-            }
-            h2 {
-                font-size: 2em;
-                margin-top: 25px;
-                padding-bottom: 10px;
-                margin-bottom: 20px;
-            }
-            input[type="text"],
-            input[type="number"],
-            select,
-            textarea {
-                width: 100%;
-                padding: 12px;
-                font-size: 1.1em;
-            }
-            button {
-                padding: 15px 25px;
-                font-size: 1.1em;
-                margin-top: 20px;
-            }
-            #recommendationResult {
-                padding: 25px;
-                margin-top: 30px;
-            }
-            #recommendationResult h3 {
-                font-size: 2.2em;
-                padding-bottom: 10px;
-                margin-bottom: 15px;
-            }
-            #recommendationResult p {
-                font-size: 1em;
-            }
-            .faq-question {
-                padding: 15px;
-                font-size: 1.1em;
-            }
-            .faq-answer {
-                padding: 18px;
-            }
-            .lecturer-gallery {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                gap: 20px;
-            }
-            .lecturer-card img {
-                width: 110px;
-                height: 110px;
-                margin-bottom: 15px;
-            }
-            .lecturer-card h3 {
-                font-size: 1.4em;
-            }
-            .testimonial-gallery {
-                grid-template-columns: 1fr; /* Stack testimonials on mobile */
-                gap: 20px;
-            }
-            .testimonial-card {
-                min-height: 160px;
-            }
-            .image-gallery {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 15px;
-            }
-            .image-gallery img {
-                height: 100px;
-            }
-        }
-
-        /* --- Enhanced Responsive Design --- */
-        @media (max-width: 1024px) {
-            .container {
-                max-width: 98vw;
-                padding: 20px;
-            }
-            .header-content img {
-                max-width: 120px;
-            }
-            h1.hero-heading {
-                font-size: 2.8em;
-            }
-            h2 {
-                font-size: 1.5em;
-            }
-        }
-        @media (max-width: 900px) {
-            .container {
-                max-width: 100vw;
-                padding: 10px;
-            }
-            .lecturer-gallery, .testimonial-gallery, .image-gallery {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-        }
-        @media (max-width: 600px) {
-            body {
-                padding: 5px;
-            }
-            .container {
-                padding: 6vw 2vw;
-                margin: 0;
-                border-width: 2px;
-            }
-            .header-content img {
-                max-width: 90px;
-                margin-bottom: 10px;
-            }
-            h1, .hero-heading {
-                font-size: 1.7em;
-                margin-bottom: 8px;
-            }
-            .subtitle, .hero-subheading {
-                font-size: 1em;
-                margin-bottom: 10px;
-            }
-            h2 {
-                font-size: 1.1em;
-                margin-top: 12px;
-                padding-bottom: 6px;
-                margin-bottom: 10px;
-            }
-            .form-group label {
-                font-size: 1em;
-            }
-            input[type="text"],
-            input[type="number"],
-            select,
-            textarea {
-                width: 100%;
-                padding: 10px;
-                font-size: 1em;
-            }
-            button, .hero-cta {
-                padding: 12px 10px;
-                font-size: 1em;
-                margin-top: 12px;
-            }
-            #recommendationResult {
-                padding: 12px;
-                margin-top: 15px;
-            }
-            #recommendationResult h3 {
-                font-size: 1.2em;
-                padding-bottom: 6px;
-                margin-bottom: 8px;
-            }
-            #recommendationResult p {
-                font-size: 0.95em;
-            }
-            .faq-question {
-                padding: 10px;
-                font-size: 1em;
-            }
-            .faq-answer {
-                padding: 10px;
-            }
-            .lecturer-gallery, .testimonial-gallery, .image-gallery {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            .lecturer-card img {
-                width: 70px;
-                height: 70px;
-                margin-bottom: 8px;
-            }
-            .lecturer-card h3 {
-                font-size: 1em;
-            }
-            .testimonial-card {
-                min-height: 100px;
-                padding: 10px;
-            }
-            .image-gallery img {
-                height: 60px;
-            }
-            .dark-mode-toggle {
-                width: 38px;
-                height: 38px;
-                font-size: 1.1em;
-                top: 10px;
-                right: 10px;
-            }
-        }
-        /* --- Horizontal scroll for galleries on small screens --- */
-        @media (max-width: 500px) {
-            .image-gallery, .lecturer-gallery, .testimonial-gallery {
-                display: flex;
-                flex-direction: row;
-                overflow-x: auto;
-                gap: 10px;
-                scroll-snap-type: x mandatory;
-            }
-            .image-gallery img, .lecturer-card, .testimonial-card {
-                min-width: 80vw;
-                max-width: 90vw;
-                scroll-snap-align: start;
-            }
-        }
-        /* --- Accessibility: Larger tap targets for FAQ arrows --- */
-        .faq-question .arrow {
-            min-width: 36px;
-            min-height: 36px;
-            display: inline-flex;
+        /* --- Thai & Myanmar Motif Divider --- */
+        .motif-divider {
+            width: 100%;
+            margin: 32px 0 24px 0;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
-        /* --- Improve focus outlines for accessibility --- */
-        button:focus, .hero-cta:focus, input:focus, select:focus, textarea:focus {
-            outline: 3px solid var(--color-accent-crimson);
-            outline-offset: 2px;
+        .motif-divider .motif {
+            font-size: 2.2em;
+            margin: 0 10px;
+            opacity: 0.85;
         }
+        .motif-divider .divider-line {
+            flex: 1;
+            height: 0;
+            border-top: 2px dashed var(--color-primary-gold);
+            opacity: 0.5;
+        }
+
+        /* --- Bilingual Section Titles --- */
+        .bilingual-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .bilingual-title .native {
+            font-family: var(--font-accent);
+            font-size: 1.1em;
+            color: var(--color-primary-gold);
+            margin-bottom: 2px;
+            letter-spacing: 1px;
+        }
+        .bilingual-title .myanmar {
+            font-family: 'Noto Sans Myanmar', sans-serif;
+            font-size: 1em;
+            color: var(--color-secondary-emerald);
+            margin-bottom: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Hero Thai Greeting --- */
+        .hero-greeting {
+            font-family: var(--font-accent);
+            color: var(--color-primary-gold);
+            font-size: 1.5em;
+            margin-bottom: 6px;
+            letter-spacing: 1.5px;
+        }
+        .hero-greeting-mm {
+            font-family: 'Noto Sans Myanmar', sans-serif;
+            color: var(--color-secondary-emerald);
+            font-size: 1.1em;
+            margin-bottom: 18px;
+        }
+
+        /* --- Footer --- */
+        .thai-myanmar-footer {
+            margin: 40px auto 0 auto;
+            padding: 18px 0 10px 0;
+            text-align: center;
+            font-size: 1.1em;
+            color: var(--color-text-light);
+            background: linear-gradient(90deg, #fff8dc 60%, #e1af2b22 100%);
+            border-top: 2px solid var(--color-primary-gold);
+            border-radius: 0 0 18px 18px;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.04);
+        }
+        .thai-myanmar-footer .motif {
+            font-size: 1.5em;
+            margin: 0 6px;
+            vertical-align: middle;
+        }
+        .thai-myanmar-footer .footer-greeting {
+            display: block;
+            margin-top: 6px;
+            font-family: var(--font-accent);
+            color: var(--color-secondary-emerald);
+            font-size: 1.05em;
+        }
+        .thai-myanmar-footer .footer-greeting-mm {
+            font-family: 'Noto Sans Myanmar', sans-serif;
+            color: var(--color-accent-crimson);
+            font-size: 1em;
+        }
+        /* --- END OF STYLES --- */
+
     </style>
 </head>
 <body>
@@ -1016,15 +875,36 @@
     <div class="container">
         <section class="hero-section">
             <img src="uploaded:Okay logo.jpg-a90509db-119b-4ce3-944c-5830d12706ad" alt="OKay Thai Language Center Logo" style="max-width:180px; border-radius:18px; box-shadow:0 6px 20px rgba(0,0,0,0.3); border:4px solid var(--color-primary-gold);" onerror="this.onerror=null;this.src='https://placehold.co/180x180/D4AF37/FFFFFF?text=OKAY+LOGO';" />
+            <div class="hero-greeting">สวัสดีค่ะ! (Sawasdee ka!)</div>
+            <div class="hero-greeting-mm">မင်္ဂလာပါ။ OKay Thai Language Center မှ ကြိုဆိုပါတယ်။</div>
             <h1 class="hero-heading">OKay Thai Language Center</h1>
-            <p class="hero-subheading">Your Gateway to Thai Language & Culture Online</p>
+            <p class="hero-subheading">Your Gateway to Thai Language & Culture Online<br>
+                <span style="font-family: 'Noto Sans Myanmar', sans-serif; color: var(--color-secondary-emerald); font-size:1em;">
+                    သင်၏ ထိုင်းဘာသာစကားနှင့် ယဉ်ကျေးမှုသို့ ဝင်ရောက်သင်ကြားရန် အကောင်းဆုံးနေရာ
+                </span>
+            </p>
             <button class="hero-cta" onclick="document.getElementById('courseFinder').scrollIntoView({behavior:'smooth'})">Find Your Course</button>
         </section>
 
+        <div class="motif-divider">
+            <span class="divider-line"></span>
+            <span class="motif">🌸</span>
+            <span class="motif">ပန်း</span>
+            <span class="motif">🪷</span>
+            <span class="divider-line"></span>
+        </div>
+
         <p style="font-size: 1.1em; color: var(--color-text-dark); margin-bottom: 40px; line-height: 1.8;">
-            Embark on a captivating Thai language journey from anywhere in the world! Our unique online learning environment is enriched by the expertise of our dedicated lecturers, all Myanmar nationals residing in Myanmar and Thailand, who bring profound cultural insights and excellent teaching skills to every class.
+            Embark on a captivating Thai language journey from anywhere in the world! Our unique online learning environment is enriched by the expertise of our dedicated lecturers, all Myanmar nationals residing in Myanmar and Thailand, who bring profound cultural insights and excellent teaching skills to every class.<br>
+            <span style="font-family: 'Noto Sans Myanmar', sans-serif; color: var(--color-secondary-emerald); font-size:1em;">
+                ထိုင်းဘာသာစကားကို ကမ္ဘာအနှံ့မှ သင်ယူနိုင်ပါသည်။ မြန်မာနိုင်ငံနှင့် ထိုင်းနိုင်ငံမှ မြန်မာနိုင်ငံသား ဆရာ/ဆရာမများမှ သင်ကြားပေးပါသည်။
+            </span>
         </p>
 
+        <div class="bilingual-title">
+            <span class="native">🔎 ค้นหาคอร์สออนไลน์ที่เหมาะกับคุณ</span>
+            <span class="myanmar">သင့်အတွက် အကောင်းဆုံး အွန်လိုင်းသင်တန်း ရှာဖွေပါ</span>
+        </div>
         <h2>🔎 Find Your Perfect Online Course</h2>
         <div id="courseFinder">
             <div class="form-group">
@@ -1061,12 +941,36 @@
             <button onclick="resetCourseFinder()">Explore Other Courses</button>
         </div>
 
+        <div class="motif-divider">
+            <span class="divider-line"></span>
+            <span class="motif">🪷</span>
+            <span class="motif">ပန်း</span>
+            <span class="motif">🌸</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="bilingual-title">
+            <span class="native">❓ คำถามที่พบบ่อย</span>
+            <span class="myanmar">မေးလေ့ရှိသော မေးခွန်းများ</span>
+        </div>
         <h2 id="faqTitle">❓ Frequently Asked Questions</h2>
         <input type="text" id="faqSearch" onkeyup="filterFaqs()" placeholder="Search common questions...">
         <div id="faqSection">
             <!-- FAQs will be loaded here by JavaScript -->
         </div>
 
+        <div class="motif-divider">
+            <span class="divider-line"></span>
+            <span class="motif">🌼</span>
+            <span class="motif">ပန်း</span>
+            <span class="motif">🪷</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="bilingual-title">
+            <span class="native">👨‍🏫 พบกับอาจารย์ผู้เชี่ยวชาญของเรา</span>
+            <span class="myanmar">ကျွန်ုပ်တို့၏ အတွေ့အကြုံရှိ ဆရာ/ဆရာမများ</span>
+        </div>
         <h2 id="lecturersTitle">👨‍🏫 Meet Our Expert Lecturers</h2>
         <div id="lecturerSection">
             <p class="culture-text" style="text-align: center; margin-bottom: 30px; font-size: 1.1em; color: var(--color-text-dark);">
@@ -1077,6 +981,18 @@
             </div>
         </div>
 
+        <div class="motif-divider">
+            <span class="divider-line"></span>
+            <span class="motif">🪷</span>
+            <span class="motif">ပန်း</span>
+            <span class="motif">🌸</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="bilingual-title">
+            <span class="native">💖 เสียงจากนักเรียนของเรา</span>
+            <span class="myanmar">ကျွန်ုပ်တို့၏ ကျောင်းသားများ၏ အတွေ့အကြုံများ</span>
+        </div>
         <h2 id="testimonialsTitle">💖 Hear From Our Students!</h2>
         <div id="testimonialsSection">
             <p class="culture-text" style="text-align: center; margin-bottom: 30px; font-size: 1.1em; color: var(--color-text-dark);">
@@ -1087,6 +1003,18 @@
             </div>
         </div>
 
+        <div class="motif-divider">
+            <span class="divider-line"></span>
+            <span class="motif">🌸</span>
+            <span class="motif">ပန်း</span>
+            <span class="motif">🪷</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="bilingual-title">
+            <span class="native">📸 ภาพบรรยากาศการเรียนรู้</span>
+            <span class="myanmar">သင်ကြားမှုအမှတ်တရ ဓာတ်ပုံများ</span>
+        </div>
         <h2 id="galleryTitle">📸 Glimpses of Our Learning Journey</h2>
         <div id="imageGallerySection">
             <p class="culture-text" style="text-align: center; margin-bottom: 30px; font-size: 1.1em; color: var(--color-text-dark);">
@@ -1108,6 +1036,20 @@
     <div id="messageBox">
         <p id="messageText"></p>
         <button onclick="hideMessageBox()">OK</button>
+    </div>
+
+    <div class="thai-myanmar-footer">
+        <span class="motif">🪷</span>
+        <span class="motif">🌸</span>
+        <span class="motif">🌼</span>
+        <span class="motif">ပန်း</span>
+        <span class="motif">🪷</span>
+        <div class="footer-greeting">
+            ขอบคุณที่มาเรียนกับเรา! <span style="font-size:1.1em;">🙏</span>
+        </div>
+        <div class="footer-greeting-mm">
+            ကျွန်ုပ်တို့နှင့်အတူ သင်ကြားမှု ခရီးစဉ်ကို စတင်ပေးသည့်အတွက် ကျေးဇူးတင်ပါသည်။
+        </div>
     </div>
 
     <script>
