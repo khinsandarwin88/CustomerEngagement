@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OKay Thai Language Center - Course & Info Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Noto+Sans+Myanmar:wght@400;700&family=Sriracha&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
         /* --- Root Variables for Rich Thai-Myanmar Inspired Theme --- */
         /* Colors are chosen to reflect the vibrant art, textiles, and temple architecture of both regions. */
         :root {
-            --font-main: 'Noto Sans Myanmar', sans-serif; /* Primary font for readability, culturally relevant */
-            --font-accent: 'Charm', cursive; /* Elegant, flowing script for titles, Thai-inspired */
+            --font-main: 'Montserrat', 'Noto Sans Myanmar', sans-serif; /* Primary font for readability, culturally relevant */
+            --font-accent: 'Sriracha', 'Charm', cursive; /* Elegant, flowing script for titles, Thai-inspired */
+            --font-hero: 'Sriracha', 'Charm', cursive;
 
             --color-primary-gold: #D4AF37; /* Royal Gold - prominent in temples, regalia */
             --color-secondary-emerald: #00704A; /* Deep Emerald Green - rich, common in art/nature */
@@ -18,7 +19,8 @@
             --color-text-dark: #2C3E50; /* Dark Navy/Charcoal - for high contrast text */
             --color-text-light: #7F8C8D; /* Muted Gray - for secondary text, subtle lines */
             --color-bg-cream: #FFF8DC; /* Cornsilk/Cream - soft, warm background, like parchment */
-            --color-bg-card: #FFFFFF; /* Pure White - clean background for content cards */
+            --color-bg-card: #f7f5f0; /* Soft warm beige */
+            --color-bg-hero: linear-gradient(120deg, #ffe6b3 0%, #e0ffd6 100%);
             --color-button-normal: #D4AF37; /* Gold button primary */
             --color-button-hover: #E1AF2B; /* Brighter gold on hover */
             --color-button-text: #FFFFFF; /* White text on buttons */
@@ -26,6 +28,7 @@
             --border-radius-soft: 18px; /* More rounded elements for a softer feel */
             --shadow-deep: 0 12px 30px rgba(0, 0, 0, 0.25); /* Deeper, more luxurious shadow */
             --pattern-opacity: 0.08; /* Subtle background pattern */
+            --color-bg-gradient: linear-gradient(135deg, #f9e7b4 0%, #ffe6b3 40%, #e0ffd6 100%);
         }
 
         /* --- Global Styles --- */
@@ -33,7 +36,7 @@
             font-family: var(--font-main);
             margin: 0;
             padding: 30px; /* Increased padding */
-            background-color: var(--color-bg-cream);
+            background: var(--color-bg-gradient);
             color: var(--color-text-dark);
             line-height: 1.7; /* Slightly more relaxed line height */
             min-height: 100vh;
@@ -59,7 +62,7 @@
         }
 
         .container {
-            background-color: var(--color-bg-card);
+            background: var(--color-bg-card);
             border-radius: var(--border-radius-soft);
             box-shadow: var(--shadow-deep); /* Deeper shadow for prominent look */
             padding: 40px; /* More padding */
@@ -149,48 +152,94 @@
             justify-content: center;
             min-height: 60vh;
             width: 100%;
-            background: none; /* No specific background image for the hero section itself */
+            background: var(--color-bg-hero);
+            border-radius: 24px;
+            box-shadow: 0 10px 40px 0 rgba(212, 175, 55, 0.10), 0 2px 8px 0 rgba(44, 62, 80, 0.08);
+            padding: 40px 10px 30px 10px;
             margin-bottom: 40px;
+            position: relative;
+            overflow: visible;
         }
 
-        .hero-heading {
-            font-family: var(--font-accent);
-            color: var(--color-accent-crimson);
-            font-size: 4em;
+        .hero-greeting, .hero-greeting-mm, .hero-heading, .hero-subheading {
+            transition: 
+                transform 0.35s cubic-bezier(.25,1.7,.45,.85),
+                box-shadow 0.35s cubic-bezier(.25,1.7,.45,.85),
+                background 0.35s;
+            will-change: transform, box-shadow;
+            cursor: pointer;
+        }
+
+        .hero-greeting {
+            font-family: var(--font-hero);
+            color: #ffb300;
+            font-size: 2.1em;
             margin-bottom: 10px;
-            text-shadow: 4px 4px 0px rgba(0,0,0,0.18);
             letter-spacing: 2px;
-            text-align: center;
+            background: linear-gradient(90deg, #ffe082 40%, #ffd54f 100%);
+            border-radius: 12px;
+            padding: 8px 22px;
+            box-shadow: 0 2px 12px rgba(255, 179, 0, 0.10);
+            display: inline-block;
         }
-
+        .hero-greeting-mm {
+            font-family: 'Noto Sans Myanmar', sans-serif;
+            color: #009688;
+            font-size: 1.3em;
+            margin-bottom: 18px;
+            background: linear-gradient(90deg, #e0ffd6 60%, #b2f7ef 100%);
+            border-radius: 12px;
+            padding: 8px 22px;
+            box-shadow: 0 2px 12px rgba(0, 150, 136, 0.10);
+            display: inline-block;
+        }
+        .hero-heading {
+            font-family: var(--font-hero);
+            color: #b22222;
+            font-size: 4.2em;
+            margin-bottom: 15px;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.13);
+            letter-spacing: 4px;
+            line-height: 1.1;
+            background: linear-gradient(90deg, #ffe082 60%, #ffd54f 100%);
+            border-radius: 16px;
+            padding: 10px 28px;
+            box-shadow: 0 4px 18px rgba(178, 34, 34, 0.08);
+            display: inline-block;
+        }
         .hero-subheading {
             font-family: var(--font-main);
-            color: var(--color-text-light);
-            font-size: 1.5em;
+            color: #009688;
+            font-size: 1.7em;
             margin-bottom: 30px;
             text-align: center;
             font-style: italic;
+            background: linear-gradient(90deg, #e0ffd6 60%, #b2f7ef 100%);
+            border-radius: 12px;
+            padding: 8px 22px;
+            box-shadow: 0 2px 12px rgba(0, 150, 136, 0.10);
+            display: inline-block;
+        }
+        .hero-subheading span {
+            font-family: 'Noto Sans Myanmar', sans-serif;
+            color: #00704A;
+            font-size: 1.1em;
+            background: none;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            display: block;
+            margin-top: 8px;
         }
 
-        .hero-cta {
-            background: linear-gradient(145deg, var(--color-button-normal), var(--color-button-hover));
-            color: var(--color-button-text);
-            padding: 18px 40px;
-            border: none;
-            border-radius: var(--border-radius-soft);
-            font-size: 1.3em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        .hero-cta:hover {
-            background: linear-gradient(145deg, var(--color-button-hover), var(--color-button-normal));
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
-            transform: translateY(-5px) scale(1.04);
+        /* Floating effect on hover/touch */
+        .hero-greeting:hover, .hero-greeting:active,
+        .hero-greeting-mm:hover, .hero-greeting-mm:active,
+        .hero-heading:hover, .hero-heading:active,
+        .hero-subheading:hover, .hero-subheading:active {
+            transform: translateY(-8px) scale(1.06) rotate(-1deg);
+            box-shadow: 0 12px 32px 0 rgba(212, 175, 55, 0.18), 0 2px 8px 0 rgba(44, 62, 80, 0.13);
+            background: linear-gradient(90deg, #fffde4 60%, #ffe082 100%);
         }
 
         /* --- DARK MODE --- */
@@ -1052,13 +1101,14 @@
     <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode"> 🌙 </button>
     <div class="container">
         <section class="hero-section">
-            <div class="hero-greeting"> สวัสดีค่ะ ! (Sawasdee ka!)</div>
-            <div class="hero-greeting-mm"> မင်္ဂလာပါ။ OKay Thai Language Center မှ ကြိုဆိုပါတယ်။ </div>
+            <div class="hero-greeting" tabindex="0"> สวัสดีค่ะ ! (Sawasdee ka!)</div>
+            <div class="hero-greeting-mm" tabindex="0"> မင်္ဂလာပါ။ OKay Thai Language Center မှ ကြိုဆိုပါတယ်။ </div>
             <marquee behavior="scroll" direction="left" scrollamount="8">
-                <h1 class="hero-heading" style="display:inline-block; margin:0;">OKay Thai Language Center</h1>
+                <h1 class="hero-heading" tabindex="0" style="display:inline-block; margin:0;">OKay Thai Language Center</h1>
             </marquee>
-            <p class="hero-subheading">Your Gateway to Thai Language & Culture Online<br>
-                <span style="font-family: 'Noto Sans Myanmar', sans-serif; color: var(--color-secondary-emerald); font-size:1em;">
+            <p class="hero-subheading" tabindex="0">
+                Your Gateway to Thai Language & Culture Online<br>
+                <span>
                      သင်၏ ထိုင်းဘာသာစကားနှင့် ယဉ်ကျေးမှုသို့ ဝင်ရောက်သင်ကြားရန် အကောင်းဆုံးနေရာ
                 </span>
             </p>
