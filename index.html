@@ -287,6 +287,149 @@
             }
         }
 
+        /* --- Enhanced Responsive Design --- */
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 98vw;
+                padding: 20px;
+            }
+            .header-content img {
+                max-width: 120px;
+            }
+            h1.hero-heading {
+                font-size: 2.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+        @media (max-width: 900px) {
+            .container {
+                max-width: 100vw;
+                padding: 10px;
+            }
+            .lecturer-gallery, .testimonial-gallery, .image-gallery {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+            .container {
+                padding: 6vw 2vw;
+                margin: 0;
+                border-width: 2px;
+            }
+            .header-content img {
+                max-width: 90px;
+                margin-bottom: 10px;
+            }
+            h1, .hero-heading {
+                font-size: 1.7em;
+                margin-bottom: 8px;
+            }
+            .subtitle, .hero-subheading {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            h2 {
+                font-size: 1.1em;
+                margin-top: 12px;
+                padding-bottom: 6px;
+                margin-bottom: 10px;
+            }
+            .form-group label {
+                font-size: 1em;
+            }
+            input[type="text"],
+            input[type="number"],
+            select,
+            textarea {
+                width: 100%;
+                padding: 10px;
+                font-size: 1em;
+            }
+            button, .hero-cta {
+                padding: 12px 10px;
+                font-size: 1em;
+                margin-top: 12px;
+            }
+            #recommendationResult {
+                padding: 12px;
+                margin-top: 15px;
+            }
+            #recommendationResult h3 {
+                font-size: 1.2em;
+                padding-bottom: 6px;
+                margin-bottom: 8px;
+            }
+            #recommendationResult p {
+                font-size: 0.95em;
+            }
+            .faq-question {
+                padding: 10px;
+                font-size: 1em;
+            }
+            .faq-answer {
+                padding: 10px;
+            }
+            .lecturer-gallery, .testimonial-gallery, .image-gallery {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .lecturer-card img {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 8px;
+            }
+            .lecturer-card h3 {
+                font-size: 1em;
+            }
+            .testimonial-card {
+                min-height: 100px;
+                padding: 10px;
+            }
+            .image-gallery img {
+                height: 60px;
+            }
+            .dark-mode-toggle {
+                width: 38px;
+                height: 38px;
+                font-size: 1.1em;
+                top: 10px;
+                right: 10px;
+            }
+        }
+        /* --- Horizontal scroll for galleries on small screens --- */
+        @media (max-width: 500px) {
+            .image-gallery, .lecturer-gallery, .testimonial-gallery {
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 10px;
+                scroll-snap-type: x mandatory;
+            }
+            .image-gallery img, .lecturer-card, .testimonial-card {
+                min-width: 80vw;
+                max-width: 90vw;
+                scroll-snap-align: start;
+            }
+        }
+        /* --- Accessibility: Larger tap targets for FAQ arrows --- */
+        .faq-question .arrow {
+            min-width: 36px;
+            min-height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* --- Improve focus outlines for accessibility --- */
+        button:focus, .hero-cta:focus, input:focus, select:focus, textarea:focus {
+            outline: 3px solid var(--color-accent-crimson);
+            outline-offset: 2px;
+        }
         /* --- Form & Input Styles --- */
         .form-group {
             margin-bottom: 30px; /* Increased margin */
@@ -721,6 +864,150 @@
             .image-gallery img {
                 height: 100px;
             }
+        }
+
+        /* --- Enhanced Responsive Design --- */
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 98vw;
+                padding: 20px;
+            }
+            .header-content img {
+                max-width: 120px;
+            }
+            h1.hero-heading {
+                font-size: 2.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+        @media (max-width: 900px) {
+            .container {
+                max-width: 100vw;
+                padding: 10px;
+            }
+            .lecturer-gallery, .testimonial-gallery, .image-gallery {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+            .container {
+                padding: 6vw 2vw;
+                margin: 0;
+                border-width: 2px;
+            }
+            .header-content img {
+                max-width: 90px;
+                margin-bottom: 10px;
+            }
+            h1, .hero-heading {
+                font-size: 1.7em;
+                margin-bottom: 8px;
+            }
+            .subtitle, .hero-subheading {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            h2 {
+                font-size: 1.1em;
+                margin-top: 12px;
+                padding-bottom: 6px;
+                margin-bottom: 10px;
+            }
+            .form-group label {
+                font-size: 1em;
+            }
+            input[type="text"],
+            input[type="number"],
+            select,
+            textarea {
+                width: 100%;
+                padding: 10px;
+                font-size: 1em;
+            }
+            button, .hero-cta {
+                padding: 12px 10px;
+                font-size: 1em;
+                margin-top: 12px;
+            }
+            #recommendationResult {
+                padding: 12px;
+                margin-top: 15px;
+            }
+            #recommendationResult h3 {
+                font-size: 1.2em;
+                padding-bottom: 6px;
+                margin-bottom: 8px;
+            }
+            #recommendationResult p {
+                font-size: 0.95em;
+            }
+            .faq-question {
+                padding: 10px;
+                font-size: 1em;
+            }
+            .faq-answer {
+                padding: 10px;
+            }
+            .lecturer-gallery, .testimonial-gallery, .image-gallery {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .lecturer-card img {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 8px;
+            }
+            .lecturer-card h3 {
+                font-size: 1em;
+            }
+            .testimonial-card {
+                min-height: 100px;
+                padding: 10px;
+            }
+            .image-gallery img {
+                height: 60px;
+            }
+            .dark-mode-toggle {
+                width: 38px;
+                height: 38px;
+                font-size: 1.1em;
+                top: 10px;
+                right: 10px;
+            }
+        }
+        /* --- Horizontal scroll for galleries on small screens --- */
+        @media (max-width: 500px) {
+            .image-gallery, .lecturer-gallery, .testimonial-gallery {
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 10px;
+                scroll-snap-type: x mandatory;
+            }
+            .image-gallery img, .lecturer-card, .testimonial-card {
+                min-width: 80vw;
+                max-width: 90vw;
+                scroll-snap-align: start;
+            }
+        }
+        /* --- Accessibility: Larger tap targets for FAQ arrows --- */
+        .faq-question .arrow {
+            min-width: 36px;
+            min-height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* --- Improve focus outlines for accessibility --- */
+        button:focus, .hero-cta:focus, input:focus, select:focus, textarea:focus {
+            outline: 3px solid var(--color-accent-crimson);
+            outline-offset: 2px;
         }
     </style>
 </head>
