@@ -162,38 +162,17 @@
         }
 
         .hero-greeting, .hero-greeting-mm, .hero-subheading {
+            /* Floating effect for greeting/subtitle only, not for main title */
             transition: 
-                transform 0.35s cubic-bezier(.25,1.7,.45,.85),
-                box-shadow 0.35s cubic-bezier(.25,1.7,.45,.85),
-                background 0.35s;
+                transform 0.25s cubic-bezier(.25,1.7,.45,.85),
+                box-shadow 0.25s cubic-bezier(.25,1.7,.45,.85),
+                background 0.25s;
             will-change: transform, box-shadow;
             cursor: pointer;
         }
 
-        .hero-greeting {
-            font-family: var(--font-hero);
-            color: #ffb300;
-            font-size: 2.1em;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            background: linear-gradient(90deg, #ffe082 40%, #ffd54f 100%);
-            border-radius: 12px;
-            padding: 8px 22px;
-            box-shadow: 0 2px 12px rgba(255, 179, 0, 0.10);
-            display: inline-block;
-        }
-        .hero-greeting-mm {
-            font-family: 'Noto Sans Myanmar', sans-serif;
-            color: #009688;
-            font-size: 1.3em;
-            margin-bottom: 18px;
-            background: linear-gradient(90deg, #e0ffd6 60%, #b2f7ef 100%);
-            border-radius: 12px;
-            padding: 8px 22px;
-            box-shadow: 0 2px 12px rgba(0, 150, 136, 0.10);
-            display: inline-block;
-        }
         .hero-heading {
+            /* Remove floating effect for main title */
             font-family: var(--font-hero);
             color: #b22222;
             font-size: 4.2em;
@@ -206,36 +185,11 @@
             padding: 10px 28px;
             box-shadow: 0 4px 18px rgba(178, 34, 34, 0.08);
             display: inline-block;
-        }
-        .hero-subheading {
-            font-family: var(--font-main);
-            color: #009688;
-            font-size: 1.7em;
-            margin-bottom: 30px;
-            text-align: center;
-            font-style: italic;
-            background: linear-gradient(90deg, #e0ffd6 60%, #b2f7ef 100%);
-            border-radius: 12px;
-            padding: 8px 22px;
-            box-shadow: 0 2px 12px rgba(0, 150, 136, 0.10);
-            display: inline-block;
-        }
-        .hero-subheading span {
-            font-family: 'Noto Sans Myanmar', sans-serif;
-            color: #00704A;
-            font-size: 1.1em;
-            background: none;
-            border-radius: 0;
-            padding: 0;
-            box-shadow: none;
-            display: block;
-            margin-top: 8px;
+            /* No hover/active effect */
         }
 
-        /* Floating effect on hover/touch */
         .hero-greeting:hover, .hero-greeting:active,
         .hero-greeting-mm:hover, .hero-greeting-mm:active,
-        .hero-heading:hover, .hero-heading:active,
         .hero-subheading:hover, .hero-subheading:active {
             transform: translateY(-8px) scale(1.06) rotate(-1deg);
             box-shadow: 0 12px 32px 0 rgba(212, 175, 55, 0.18), 0 2px 8px 0 rgba(44, 62, 80, 0.13);
@@ -1370,12 +1324,14 @@
         // === DARK MODE MODULE ====
         // =========================
         function setDarkMode(enabled) {
+            const body = document.body;
+            const toggleBtn = document.getElementById('darkModeToggle');
             if (enabled) {
-                document.body.classList.add('dark-mode');
-                document.getElementById('darkModeToggle').textContent = ' ☀️ ';
+                body.classList.add('dark-mode');
+                toggleBtn.textContent = ' ☀️ ';
             } else {
-                document.body.classList.remove('dark-mode');
-                document.getElementById('darkModeToggle').textContent = ' 🌙 ';
+                body.classList.remove('dark-mode');
+                toggleBtn.textContent = ' 🌙 ';
             }
             localStorage.setItem('thaiDarkMode', enabled ? '1' : '0');
         }
@@ -1394,25 +1350,23 @@
             try {
                 const stored = localStorage.getItem(key);
                 return stored ? JSON.parse(stored) : fallback;
-            } catch (e) {
-                console.error(`Error loading ${key} from localStorage:`, e);
+            } catch {
                 return fallback;
             }
         }
         function save(key, data) {
             try {
                 localStorage.setItem(key, JSON.stringify(data));
-            } catch (e) {
-                console.error(`Error saving ${key} to localStorage:`, e);
-            }
+            } catch {}
         }
 
         // =========================
         // === MESSAGE BOX MODULE ==
         // =========================
         function showMessageBox(message) {
+            const msgBox = document.getElementById("messageBox");
             document.getElementById("messageText").textContent = message;
-            document.getElementById("messageBox").style.display = "block";
+            msgBox.style.display = "block";
         }
         function hideMessageBox() {
             document.getElementById("messageBox").style.display = "none";
@@ -1451,14 +1405,14 @@
             } else if (classType) {
                 levelSelectionDiv.style.display = 'block';
                 const levels = courses[classType];
-                levels.forEach(course => {
+                let options = '';
+                for (let i = 0; i < levels.length; i++) {
+                    const course = levels[i];
                     if (course.level !== 'Custom' && course.level !== 'Basic Speaking') {
-                        const option = document.createElement('option');
-                        option.value = course.level;
-                        option.textContent = course.level;
-                        classLevelSelect.appendChild(option);
+                        options += `<option value="${course.level}">${course.level}</option>`;
                     }
-                });
+                }
+                classLevelSelect.innerHTML += options;
             } else {
                 levelSelectionDiv.style.display = 'none';
             }
@@ -1562,14 +1516,14 @@
             } else if (classType) {
                 levelSelectionDiv.style.display = 'block';
                 const levels = courses[classType];
-                levels.forEach(course => {
+                let options = '';
+                for (let i = 0; i < levels.length; i++) {
+                    const course = levels[i];
                     if (course.level !== 'Custom' && course.level !== 'Basic Speaking') { // Avoid adding custom/speaking as selectable level
-                        const option = document.createElement('option');
-                        option.value = course.level;
-                        option.textContent = course.level;
-                        classLevelSelect.appendChild(option);
+                        options += `<option value="${course.level}">${course.level}</option>`;
                     }
-                });
+                }
+                classLevelSelect.innerHTML += options;
             } else {
                 levelSelectionDiv.style.display = 'none';
             }
@@ -1627,25 +1581,26 @@
         // --- FAQ SECTION LOGIC ---
         function renderFaqs(filteredFaqs = faqs) {
             const faqSectionDiv = document.getElementById('faqSection');
-            faqSectionDiv.innerHTML = ''; // Clear previous FAQs
-
-            if (filteredFaqs.length === 0) {
+            if (!faqSectionDiv) return;
+            faqSectionDiv.innerHTML = '';
+            if (!filteredFaqs.length) {
                 faqSectionDiv.innerHTML = '<p style="text-align: center; color: var(--color-text-light);">No matching FAQs found.</p>';
                 return;
             }
-
-            filteredFaqs.forEach((faq, index) => {
-                const faqItem = document.createElement('div');
-                faqItem.className = 'faq-item';
-                faqItem.innerHTML = `
-                    <div class="faq-question" onclick="toggleFaq(${index})">
-                        <span>${faq.question}</span>
-                        <span class="arrow">▶</span>
+            let html = '';
+            for (let i = 0; i < filteredFaqs.length; i++) {
+                const faq = filteredFaqs[i];
+                html += `
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(${i})">
+                            <span>${faq.question}</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="faq-answer" id="faqAnswer-${i}">${faq.answer}</div>
                     </div>
-                    <div class="faq-answer" id="faqAnswer-${index}">${faq.answer}</div>
                 `;
-                faqSectionDiv.appendChild(faqItem);
-            });
+            }
+            faqSectionDiv.innerHTML = html;
         }
 
         function toggleFaq(index) {
@@ -1655,7 +1610,6 @@
                 answer.style.display = 'none';
                 arrow.classList.remove('rotate');
             } else {
-                // Close all other open FAQs first (optional, but good for single-open accordion)
                 document.querySelectorAll('.faq-answer.show').forEach(openAnswer => {
                     openAnswer.style.display = 'none';
                     openAnswer.previousElementSibling.querySelector('.arrow').classList.remove('rotate');
@@ -1674,43 +1628,21 @@
             renderFaqs(filtered);
         }
 
-        // --- LECTURER SECTION LOGIC ---
-        function renderLecturers() {
-            const lecturerGalleryDiv = document.querySelector('#lecturerSection .lecturer-gallery');
-            lecturerGalleryDiv.innerHTML = ''; // Clear existing content
-
-            lecturers.forEach(lecturer => {
-                const lecturerCard = document.createElement('div');
-                lecturerCard.className = 'lecturer-card';
-                lecturerCard.innerHTML = `
-                    <img src="${lecturer.image}" alt="Lecturer ${lecturer.name}" onerror="this.onerror=null;this.src='https://placehold.co/140x140/D4AF37/FFFFFF?text=TR';">
-                    <h3>${lecturer.name}</h3>
-                    <p><strong>Qualification:</strong> ${lecturer.qualification}</p>
-                    <p><strong>Work Experience:</strong> ${lecturer.workExperience}</p>
-                    <p><strong>Teaching Experience:</strong> ${lecturer.teachingExperience}</p>
-                `;
-                lecturerGalleryDiv.appendChild(lecturerCard);
-            });
-        }
-
-        // --- TESTIMONIALS SECTION LOGIC ---
-        function renderTestimonials() {
-            const testimonialGalleryDiv = document.querySelector('#testimonialsSection .testimonial-gallery');
-            testimonialGalleryDiv.innerHTML = ''; // Clear existing content
-
-            testimonials.forEach(testimonial => {
-                const testimonialCard = document.createElement('div');
-                testimonialCard.className = 'testimonial-card';
-                // Generate stars based on rating
-                const starsHtml = '⭐'.repeat(testimonial.rating);
-                testimonialCard.innerHTML = `
-                    <div class="stars">${starsHtml}</div>
-                    <p>"${testimonial.review}"</p>
-                    <span class="author">- ${testimonial.studentName}</span>
-                `;
-                testimonialGalleryDiv.appendChild(testimonialCard);
-            });
-        }
+        // =========================
+        // === LECTURER MODULE =====
+        // =========================
+        const lecturers = [
+            { name: "TR. ZAW", qualification: "B.A (Q,Thai, YUFL)", workExperience: "3 years working experiences in Thai Company", teachingExperience: "5 years teaching experiences", image: "uploaded:Lecturer 1.jpg-224d0f91-72fe-4152-8fba-afa71040df9b" },
+            { name: "TR. PHYU", qualification: "B.A (Thai, YUFL)", workExperience: "Thai Translator and Interpreter in Toyota Company", teachingExperience: "2 years teaching experiences", image: "uploaded:Lecturer 2.jpg-446124da-8605-4852-b0eb-990a5738de39" },
+            { name: "TR. SHWE", qualification: "B.A (Q,Thai, YUFL)", workExperience: "Thai translator and interpreter in Golden Sea MyanmarCo.,Ltd", teachingExperience: "2 years teaching experiences", image: "uploaded:Lecturer 3.jpg-3a708647-e922-4e59-bbf8-895e13926b8f" },
+            { name: "TR. MAY", qualification: "B.A (Q,Thai, YUFL)", workExperience: "3 years working experiences in Thai Company", teachingExperience: "2 years teaching experiences", image: "uploaded:Lecturer 4.jpg-2abe5fd3-0898-4139-9dd3-e08f0c8853d5" },
+            { name: "TR. HTOO", qualification: "B.A (Q,Thai, YUFL)", workExperience: "Freelance Thai Translator and Interpreter", teachingExperience: "2 years teaching experience", image: "uploaded:Lecturer 5.jpg-0bc1e9ff-d035-4c85-97df-d4bf98c8f003" },
+            { name: "TR. PHUE", qualification: "B.A (Q,Thai, YUFL)", workExperience: "Freelance Thai Translator and Interpreter", teachingExperience: "2 years teaching experiences", image: "uploaded:Lecturer 6.jpg-fed3fe37-6400-4600-b639-3a49951750ba" },
+            { name: "TR. SAKAR", qualification: "B.A (Q,Thai, YUFL)", workExperience: "1 year working experience in Thai Company", teachingExperience: "1 year teaching experience", image: "uploaded:Lecturer 7.jpg-2a9340ef-f095-4c00-b5c7-e9d2831fdc95" },
+            { name: "TR. SEINN", qualification: "B.A (Q,Thai, YUFL)", workExperience: "Freelance Thai Translator and Interpreter", teachingExperience: "3 years teaching experience", image: "uploaded:Lecturer 8.jpg-b33da06b-831d-464e-b642-8198da745c36" },
+            { name: "TR. HSU", qualification: "B.A (Thai, YUFL)", workExperience: "Thai Linguist 1 year", teachingExperience: "5 years teaching experience", image: "uploaded:Lecturer 9.jpg-51a985c7-6547-4507-b78d-210bfe1aec8b" },
+            { name: "TR. PHYU", qualification: "B.A (Thai, YUFL)", workExperience: "Freelance Thai Translator and Interpreter", teachingExperience: "1 year teaching experience", image: "uploaded:Lecturer 10.jpg-1a5a65b2-988e-4da8-b2b0-ddaec3b8637b" }
+        ];
 
         // =========================
         // === SECTION NAVIGATION ==
@@ -1748,12 +1680,14 @@
 
         // --- DARK MODE LOGIC ---
         function setDarkMode(enabled) {
+            const body = document.body;
+            const toggleBtn = document.getElementById('darkModeToggle');
             if (enabled) {
-                document.body.classList.add('dark-mode');
-                document.getElementById('darkModeToggle').textContent = ' ☀️ ';
+                body.classList.add('dark-mode');
+                toggleBtn.textContent = ' ☀️ ';
             } else {
-                document.body.classList.remove('dark-mode');
-                document.getElementById('darkModeToggle').textContent = ' 🌙 ';
+                body.classList.remove('dark-mode');
+                toggleBtn.textContent = ' 🌙 ';
             }
             localStorage.setItem('thaiDarkMode', enabled ? '1' : '0');
         }
