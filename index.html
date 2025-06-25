@@ -162,7 +162,7 @@
         }
 
         .hero-greeting, .hero-greeting-mm, .hero-subheading {
-            /* Floating effect for greeting/subtitle only, not for main title */
+            /* Floating effect for greeting/subtitle */
             transition: 
                 transform 0.25s cubic-bezier(.25,1.7,.45,.85),
                 box-shadow 0.25s cubic-bezier(.25,1.7,.45,.85),
@@ -170,9 +170,16 @@
             will-change: transform, box-shadow;
             cursor: pointer;
         }
+        .hero-greeting:hover, .hero-greeting:active,
+        .hero-greeting-mm:hover, .hero-greeting-mm:active,
+        .hero-subheading:hover, .hero-subheading:active {
+            transform: translateY(-8px) scale(1.06) rotate(-1deg);
+            box-shadow: 0 12px 32px 0 rgba(212, 175, 55, 0.18), 0 2px 8px 0 rgba(44, 62, 80, 0.13);
+            background: linear-gradient(90deg, #fffde4 60%, #ffe082 100%);
+        }
 
+        /* Main title (hero-heading) floating effect restored, but NOT for marquee */
         .hero-heading {
-            /* Remove floating effect for main title */
             font-family: var(--font-hero);
             color: #b22222;
             font-size: 4.2em;
@@ -185,12 +192,14 @@
             padding: 10px 28px;
             box-shadow: 0 4px 18px rgba(178, 34, 34, 0.08);
             display: inline-block;
-            /* No hover/active effect */
+            transition: 
+                transform 0.25s cubic-bezier(.25,1.7,.45,.85),
+                box-shadow 0.25s cubic-bezier(.25,1.7,.45,.85),
+                background 0.25s;
+            will-change: transform, box-shadow;
+            cursor: pointer;
         }
-
-        .hero-greeting:hover, .hero-greeting:active,
-        .hero-greeting-mm:hover, .hero-greeting-mm:active,
-        .hero-subheading:hover, .hero-subheading:active {
+        .hero-heading:hover, .hero-heading:active {
             transform: translateY(-8px) scale(1.06) rotate(-1deg);
             box-shadow: 0 12px 32px 0 rgba(212, 175, 55, 0.18), 0 2px 8px 0 rgba(44, 62, 80, 0.13);
             background: linear-gradient(90deg, #fffde4 60%, #ffe082 100%);
@@ -1060,7 +1069,7 @@
             <div class="hero-greeting-mm" tabindex="0">မင်္ဂလာပါ။ OKay Thai Language Center မှ ကြိုဆိုပါတယ်။</div>
             <!-- === MAIN TITLE (MARQUEE ONLY) === -->
             <marquee behavior="scroll" direction="left" scrollamount="8">
-                <h1 class="hero-heading" tabindex="0" style="display:inline-block; margin:0;">OKay Thai Language Center</h1>
+                <h1 class="hero-heading" tabindex="0" style="display:inline-block; margin:0; cursor:default; transition:none; box-shadow:0 4px 18px rgba(178,34,34,0.08); background:linear-gradient(90deg,#ffe082 60%,#ffd54f 100%);">OKay Thai Language Center</h1>
             </marquee>
             <!-- === SUBTITLE === -->
             <p class="hero-subheading" tabindex="0">
